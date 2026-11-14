@@ -24,6 +24,8 @@ def simple_bettor(funds,initial_bet, bet_count):
             value -= bet
             # print(f"You lost! Your new balance is: {value}")
         current_bet_count += 1
+    if value <= 0:
+        value = 'broke'
     print(f"Final balance: {value}")
 
 x=0 
