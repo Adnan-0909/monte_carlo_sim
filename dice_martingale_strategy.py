@@ -16,6 +16,7 @@ def rollDice():
 
 def doubler_bettor(funds,initial_bet,bet_count):
     value = funds
+    global broke_count
     bet = initial_bet
 
     bX = []#list for the bets, on x-axis
@@ -45,11 +46,13 @@ def doubler_bettor(funds,initial_bet,bet_count):
             vY.append(value)
             if value <= 0:
                 value = 'broke'
+                broke_count += 1
                 break
             # print(f"You lost! Your new balance is: {value}")
         current_bet_count += 1
     plt.plot(bX, vY)
 x=0 
+broke_count = 0
 while x<100:#checking for a 50 different bettors, that how well they performed
     doubler_bettor(10000, 100, 100)
     x+=1
@@ -59,4 +62,7 @@ while x<100:#checking for a 50 different bettors, that how well they performed
 
 plt.ylabel('Account Value')
 plt.xlabel('Number of Bets')
+print(f"Number of broke bettors: {broke_count/float(x)*100}%")
+print(f"Survival rate: {(1-(broke_count/float(x)))*100}%")
+plt.axhline(y=0, color='r', linestyle='-')
 plt.show()  
